@@ -2,6 +2,7 @@ export { theme } from './theme'
 import { CustomLayout } from './layouts/CustomLayout'
 
 import { ExampleBasedTest } from './surfers/example-based-test'
+import { SortRandomInputs } from './surfers/sort-random-inputs'
 
 export default CustomLayout
 
@@ -99,44 +100,11 @@ TODO: style it better
 
 ---
 
-[code example]
+<SortRandomInputs />
 
 ```notes
-good and bad things highlighted with a surfer
-
-# Good
-- list
-- of good things
-- about example based testing
-
-# Bad
-- list
-- of bad things
-- about example based testing
-
-I'll explain concepts on silly example
-don't worry, I'll show you real-live example
-for a frontend project once we grasp the basics
-
-```
-
----
-
-# Randomize input
-
-```notes
-tell what problems random input addresses
 let a computer generate test cases so we don't have to
 
-design the API so that it's similar to fast-check
-
-```
-
----
-
-[code example]
-
-```notes
 FUZZING or fuzz testing is an automated software testing technique
 that involves providing invalid, unexpected, or random data as
 inputs to a computer program. The program is then monitored for
@@ -144,13 +112,21 @@ exceptions such as crashes, or failing built-in code assertions or
 for finding potential memory leaks.
 
 not super useful
-
-that's all great, but how do we write assertions?
 ```
 
 ---
 
-[code example]
+sort-assert-what
+
+```notes
+we can't really expect any concrete value
+
+this is where we change our mindset
+```
+
+---
+
+sort-duplicated-implementation
 
 ```notes
 code example with duplicated implementation
@@ -158,10 +134,14 @@ code example with duplicated implementation
 
 ---
 
+actual-implementation
+
+---
+
 # Properties
 
 ```notes
-explain what are properties
+always true in given circumstances
 
 'if this sounds confusing for you, let me tell you a story'
 ```

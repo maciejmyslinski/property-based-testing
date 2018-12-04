@@ -13,8 +13,8 @@ export default CustomLayout
 # ✈️
 
 ```notes
-I always wantend to be a pilot (freedom, expert, safe)
-most of you came here by a plane
+I always wantend to be a pilot (freedom, know details about all those switches inside the cocpit, safe)
+some of you came here by a plane
 think about software that runs that plane
 how well would you like that software to be tested?
 we write software too, how do we test it?
@@ -96,6 +96,7 @@ shouldn't your tests help you find bugs instead of luring you there are none?
 HOW? first of, data that comes in. computers are great with generating data. let the computer do it.
 
 TODO: style it better
+TODO: put Edsger's image
 ```
 
 ---
@@ -144,6 +145,7 @@ actual-implementation
 always true in given circumstances
 
 'if this sounds confusing for you, let me tell you a story'
+
 ```
 
 ---
@@ -155,17 +157,35 @@ always true in given circumstances
 - possible properties
 
 ```notes
-tell a story about a cake
-possible properties appear as you tell the story
+icecream sandwitch:
+
+* apple – type problem. it's a fruit
+* half of it (like a pie) – shape problem, no symmetry
+* the sliver of it (not complete) – size problem
+* empty plate – presence / emptiness problem
+* 2 of them – an enumeration problem
+* melted sandwitch – range problem (the temperature has to be in a certain range)
+* wrong shape (complete, but misplaced pieces) – wrong relationship between the parts
+* top cookie-bar underneath the sandwitch – order problem
+you know it's wrong but why
 ```
 
 ---
 
-[code example]
+proper-assertions
 
 ```notes
 here you write assertions using properties
 
+we now can run this multiple times
+
+```
+
+---
+
+run-multiple-times
+
+```notes
 and when you write such a test, start in in watch mode
 and develop in the meantime, you tested houndreads of
 examples before you even push it
@@ -175,83 +195,54 @@ all you need is to create a generator that yields some random data
 and define properties of the output. That's it.
 
 However, frameworks give you some important things for free.
-for a frontend project once we grasp the basics
-
 ```
 
 ---
 
-# Generators
+actual-implementation (with fast-check)
 
 ```notes
-deliberate randomness – not completly random
-it generates both small and large values, making
-it easier to dig into counterexamples without having to tweak a size parameter manually
+explain fast-check API
+
+but that's not how you should have it in your codebase
 ```
 
 ---
 
-[code example]
+both-example-and-property
 
 ```notes
-this code example uses fast-check arbitraries
+you should have both
 
-here the audience see fast-check for the first time
-tell them why you like it
+keep you examples! this is the complete test suite: we not only tell some
+vague story, we also describe what it should do in general,
+we specify requirements.
+
+And that's exactly what tests should do, specify requirements, then give some examples.
+you can notice property-based-tests are usually more complecated
+which is a downside
+
+so let's run it
 ```
 
 ---
 
-# Runners
-
----
-
-[code example]
+[screenshot of a failure]
 
 ```notes
-this code example uses fast-check runners
+it failed for [10, 0] example
+we just discovered a bug we could've miss with example based testing
 
-ok, so you run those tests with randomly generated data
-suddenly a test fails
-and it says: well, I failed, here is 300 random strings I generated
+it's like an insurance.
 ```
 
 ---
 
-[messy output from test runner without shrinking]
+[code] this code takes the countexample and creates an example-based test out of it
 
 ```notes
-good luck debugging it!
-
-noise is good for provoking failure but it's bad for debugging it
-not all inputs contribute to failure
-```
-
----
-
-# Shrinkers
-
----
-
-[shrinked counter example]
-
-```notes
-seems like negative numbers are causing a problem
-you can take this counterexample, create an example-based test out of it
-and this way protect against regressions. You can not be sure the generator will find this bug ever again.
-
-another thing you can do is take the counter example and pass it as an example to the runner
-
-or take the seed. A seed is a datetime that a generator was starting with; it allows you to generate the same data.
-```
-
----
-
-[emoji of something connected with 'the wild']
-
-```notes
-tell the audience about PBT in the wild - stories of real companies
-that found and solved real bugs with it
+now we are save against regressions
+and employ computers to find more bugs for us
 ```
 
 ---
@@ -261,6 +252,14 @@ that found and solved real bugs with it
 ```notes
 LevelDB is a fast key-value storage C++ library written at Google that
 provides an ordered mapping from string keys to string values.
+
+17 steps
+then 33 steps
+
+What human could have imagined a failing minimal sequence of 17 steps?
+What human could have imagined a failing minimal sequence of 33 steps?
+
+TODO: put google logo here
 ```
 
 ---
@@ -268,57 +267,24 @@ provides an ordered mapping from string keys to string values.
 # Spotify
 
 ```notes
-shared module  that handles the sequencing of tracks (not the actual
-audio playback) including shuffling, repeating tracks,
+C++ shared module that handles the sequencing of tracks
+including shuffling, repeating tracks,
 repeating playlists and so for.
 
+TODO: create a graph for these steps
 1. Turn on playlist repeat.
 2. Prepare playback of a playlist with a single track, let’s call this track A.
 3. Play the prepared playlist.
 4. Add a single track to the start of the playlist.
 5. Skip to the next track.
 
+TODO: create a slide with ios and adroid clients
 Since we have repeat enabled, we expect to wrap around to the newly added track
 when we advance from the first track. However, instead we get the same track again.
 This was even easily reproducible in both the iOS and Android clients!
+
+TODO: put spotify logo here
 ```
-
----
-
-# Enough it Enough
-
-```notes
-Enough is enough. We are frontend devs.
-We don't implement sort functions, nor advanced backend logic
-for music players, let alone databases.
-And you promised us to show a real live frontend example.
-```
-
----
-
-# 🏁
-
-```notes
-tell a short story of final-form
-  - redux-form
-  - a lot of experience
-  - framework agnostic
-  - smaller
-  - 100% coverage with example based tests
-  - 3249 github stars
-  - 33402 weekly downloads on npm
-
-you would expect that kind of library fairly bug-free, wouldn't you?
-and yet, I decided to write a PBT for it.
-
-and surprisingly I found some bugs
-
-part of this final-form's ecosystem is a package for array-like structure in forms
-```
-
----
-
-[demo of react-final-form-arrays]
 
 ---
 
@@ -331,6 +297,38 @@ it's a pattern of PBT especially usefull for testing UI and state machines
 ---
 
 [graph that shows the idea behind model-based testing]
+
+---
+
+# 🏁
+
+---
+
+[snapshot of methods provided by final-form-arrays]
+
+```notes
+tell a short story of final-form
+  - redux-form
+  - a lot of experience
+  - framework agnostic
+  - smaller
+  - 100% coverage with example based tests
+  - 3249 github stars
+  - 33402 weekly downloads on npm
+
+part of this final-form's ecosystem is a package for array-like structure in forms
+react-final-form-arrays
+  - 11,272 weekly downloads
+
+you would expect that kind of library fairly bug-free, wouldn't you?
+I decided to write a PBT for it.
+
+and surprisingly I found some bugs
+```
+
+---
+
+[demo of react-final-form-arrays]
 
 ---
 
@@ -398,15 +396,14 @@ our productions codebase.
 # Example ❤️ Property
 
 ```notes
-recap pros and cons of example based testing
-recap pros and cons of property based testing
-
-use those techniques in combination to get the best results
+example-based testing is ok, keep writing those
+change your mindset and write property-based tests
+write tests that help you find bugs instead of luring you there are none
 ```
 
 ---
 
-[airplane emoji]
+✈️
 
 ```notes
 we're coming to the end of this conference

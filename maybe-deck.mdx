@@ -1,0 +1,76 @@
+
+
+# Generators
+
+```notes
+deliberate randomness – not completly random
+it generates both small and large values, making
+it easier to dig into counterexamples without having to tweak a size parameter manually
+```
+
+---
+
+[code example]
+
+```notes
+this code example uses fast-check arbitraries
+
+here the audience see fast-check for the first time
+tell them why you like it
+```
+
+---
+
+# Runners
+
+---
+
+[code example]
+
+```notes
+this code example uses fast-check runners
+
+ok, so you run those tests with randomly generated data
+suddenly a test fails
+and it says: well, I failed, here is 300 random strings I generated
+```
+
+---
+
+[messy output from test runner without shrinking]
+
+```notes
+good luck debugging it!
+
+noise is good for provoking failure but it's bad for debugging it
+not all inputs contribute to failure
+```
+
+---
+
+# Shrinkers
+
+---
+
+[shrinked counter example]
+
+```notes
+seems like negative numbers are causing a problem
+you can take this counterexample, create an example-based test out of it
+and this way protect against regressions. You can not be sure the generator will find this bug ever again.
+
+another thing you can do is take the counter example and pass it as an example to the runner
+
+or take the seed. A seed is a datetime that a generator was starting with; it allows you to generate the same data.
+```
+
+---
+
+[emoji of something connected with 'the wild']
+
+```notes
+tell the audience about PBT in the wild - stories of real companies
+that found and solved real bugs with it
+```
+
+---

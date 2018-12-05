@@ -1,8 +1,14 @@
 export { theme } from './theme'
 import { CustomLayout } from './layouts/CustomLayout'
 
-import { ExampleBasedTest } from './surfers/example-based-test'
-import { SortRandomInputs } from './surfers/sort-random-inputs'
+import { ExampleBasedTest } from './surfers/1.example-based-test'
+import { SortRandomInputs } from './surfers/2.sort-random-inputs'
+import { SortAssertWhat } from './surfers/3.sort-assert-what'
+import { SortDuplicatedImplementation } from './surfers/4.sort-duplicated-implementation'
+import { ActualImplementation } from './surfers/5.actual-implementation'
+import { ProperAssertions } from './surfers/6.proper-assertions'
+import { RunMultipleTimes } from './surfers/7.run-multiple-times'
+import { SortFuncFinal as FinalTest } from './surfers/8.sort-func-final'
 
 export default CustomLayout
 
@@ -16,6 +22,8 @@ export default CustomLayout
 I always wantend to be a pilot (freedom, know details about all those switches inside the cocpit, safe)
 some of you came here by a plane
 think about software that runs that plane
+real time safety critical systems
+you put your live in the hands of a plane manufacturer
 how well would you like that software to be tested?
 we write software too, how do we test it?
 
@@ -117,7 +125,7 @@ not super useful
 
 ---
 
-sort-assert-what
+<SortAssertWhat />
 
 ```notes
 we can't really expect any concrete value
@@ -127,15 +135,11 @@ this is where we change our mindset
 
 ---
 
-sort-duplicated-implementation
+<SortDuplicatedImplementation />
 
 ```notes
 code example with duplicated implementation
 ```
-
----
-
-actual-implementation
 
 ---
 
@@ -159,10 +163,11 @@ always true in given circumstances
 ```notes
 icecream sandwitch:
 
-* apple – type problem. it's a fruit
 * half of it (like a pie) – shape problem, no symmetry
 * the sliver of it (not complete) – size problem
+* apple – type problem. it's a fruit
 * empty plate – presence / emptiness problem
+
 * 2 of them – an enumeration problem
 * melted sandwitch – range problem (the temperature has to be in a certain range)
 * wrong shape (complete, but misplaced pieces) – wrong relationship between the parts
@@ -172,7 +177,7 @@ you know it's wrong but why
 
 ---
 
-proper-assertions
+<ProperAssertions />
 
 ```notes
 here you write assertions using properties
@@ -183,7 +188,7 @@ we now can run this multiple times
 
 ---
 
-run-multiple-times
+<RunMultipleTimes />
 
 ```notes
 and when you write such a test, start in in watch mode
@@ -199,7 +204,7 @@ However, frameworks give you some important things for free.
 
 ---
 
-actual-implementation (with fast-check)
+<FinalTest />
 
 ```notes
 explain fast-check API

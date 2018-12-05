@@ -3,14 +3,15 @@ describe('sort function', () => {
     generate(array(integer()), (generatedArray) => {
       const result = sort(generatedArray)
 
-      // type
+      // type – orange
+      // presence / emptiness – plate
       expect(Array.isArray(result)).toBe(true)
 
-      // number of elements
+      // size – sliver
       expect(generatedArray.length).toBe(result.length)
 
       result.forEach((element, i) => {
-        // type of elements
+        // shape – half of a sandwich
         expect(typeof element).toBe('number')
 
         // every number should be smaller than the next one
@@ -25,3 +26,4 @@ describe('sort function', () => {
     })
   })
 })
+  §
